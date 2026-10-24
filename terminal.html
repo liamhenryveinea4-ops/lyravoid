@@ -33,7 +33,7 @@
     p {
       color: #c5c6c7;
       font-size: 0.95rem;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
     input[type="text"] {
       width: 80%;
@@ -46,14 +46,13 @@
       text-align: center;
       outline: none;
       border-radius: 4px;
-      text-transform: lowercase;
     }
     input[type="text"]:focus {
       border-color: #66fcf1;
       box-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
     }
     button {
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 10px 25px;
       background: #45a29e;
       border: none;
@@ -68,27 +67,43 @@
     button:hover {
       background: #66fcf1;
     }
+    #error-msg {
+      color: #ff4d4d;
+      font-size: 0.9rem;
+      margin-top: 15px;
+      display: none;
+      letter-spacing: 1px;
+    }
   </style>
 </head>
 <body>
 
   <div class="terminal">
-    <h1>[ SYSTEM ENCRYPTION ]</h1>
-    <p>Autorisierung erforderlich. Bitte Entschlüsselungs-Code eingeben:</p>
-    <form onsubmit="checkCode(event)">
-      <input type="text" id="passcode" placeholder="Code eingeben..." autocomplete="off" required>
+    <h1>[ SYSTEM ACCESS ]</h1>
+    <p>Autorisierung erforderlich. Bitte Code eingeben:</p>
+    <form onsubmit="handleAuth(event)">
+      <input type="text" id="passcode" placeholder="Passwort..." autocomplete="off" required>
       <br>
-      <button type="submit">Entschlüsseln</button>
+      <button type="submit">Eingabe</button>
     </form>
+    <div id="error-msg">⚠️ Falsches Passwort!</div>
   </div>
 
   <script>
-    function checkCode(e) {
+    function handleAuth(e) {
       e.preventDefault();
-      const code = document.getElementById('passcode').value.trim().toLowerCase();
-      
-      // Leitet direkt zur Datei <code-eingabe>.html weiter
-      window.location.href = code + '.html';
+      const input = document.getElementById('passcode').value.trim().toLowerCase();
+      const errorMsg = document.getElementById('error-msg');
+
+      if (input === 'ai') {
+        window.location.href = 'ai.html';
+      } else if (input === '7165272081347') {
+        window.location.href = '7165272081347.html';
+      } else {
+        errorMsg.style.display = 'block';
+        document.getElementById('passcode').value = '';
+        document.getElementById('passcode').focus();
+      }
     }
   </script>
 
