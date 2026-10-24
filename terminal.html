@@ -90,30 +90,25 @@
   </div>
 
   <script>
-    function secureHash(str) {
-      let h1 = 0xdeadbeef, h2 = 0x41c64e6d;
-      for (let i = 0; i < str.length; i++) {
-        const ch = str.charCodeAt(i);
-        h1 = Math.imul(h1 ^ ch, 2654435761);
-        h2 = Math.imul(h2 ^ ch, 1597334677);
-      }
-      h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-      h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-      return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
-    }
-
     function handleAuth(e) {
       e.preventDefault();
       const input = document.getElementById('passcode').value.trim().toLowerCase();
+      const targetUrl = input + '.html';
       const errorMsg = document.getElementById('error-msg');
-      const token = secureHash(input);
 
-      if (token === '1t1hsvv1w21k4') {
-        window.location.href = input + '.html';
-      } else if (token === '81w9bfluk72m') {
-        const target = ['happy', 'secret', 'birthday'].join('-') + '.html';
-        window.location.href = target;
-      } else {
+      fetch(targetUrl, { method: 'HEAD' })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = targetUrl;
+          } else {
+            showError();
+          }
+        })
+        .catch(() => {
+          window.location.href = targetUrl;
+        });
+
+      function showError() {
         errorMsg.style.display = 'block';
         document.getElementById('passcode').value = '';
         document.getElementById('passcode').focus();
