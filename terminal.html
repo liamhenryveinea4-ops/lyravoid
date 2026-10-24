@@ -103,12 +103,12 @@
       const errorMsg = document.getElementById('error-msg');
       const hash = await sha256(input);
 
-      // SHA-256 Hash für "ai"
+      
       if (hash === '3a7bd3e2360a3d29eea436fcfb7e44c735d117c42d1c1835420b6b9942dd4f1b') {
         window.location.href = input + '.html';
-      // SHA-256 Hash für "7165272081347"
+     
       } else if (hash === 'e48a3aa6c3d1000673010b9fb7dbe7cf8264580fb2228556db743e498c1b3ee6') {
-        // Zielpfad zusammengesetzt, damit "happy-secret-birthday" nicht als ganzes Wort suchbar ist
+      
         const target = ['happy', 'secret', 'birthday'].join('-') + '.html';
         window.location.href = target;
       } else {
