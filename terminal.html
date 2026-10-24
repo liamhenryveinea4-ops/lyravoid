@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Access Terminal</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    body {
+      background-color: #0b0c10;
+      color: #66fcf1;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .terminal {
+      background: #1f2833;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(102, 252, 241, 0.2);
+      text-align: center;
+      max-width: 450px;
+      width: 90%;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+    p {
+      color: #c5c6c7;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 12px;
+      background: #0b0c10;
+      border: 1px solid #45a29e;
+      color: #66fcf1;
+      font-family: inherit;
+      font-size: 1.1rem;
+      text-align: center;
+      outline: none;
+      border-radius: 4px;
+      text-transform: lowercase;
+    }
+    input[type="text"]:focus {
+      border-color: #66fcf1;
+      box-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: #45a29e;
+      border: none;
+      color: #0b0c10;
+      font-weight: bold;
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #66fcf1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="terminal">
+    <h1>[ SYSTEM ENCRYPTION ]</h1>
+    <p>Autorisierung erforderlich. Bitte Entschlüsselungs-Code eingeben:</p>
+    <form onsubmit="checkCode(event)">
+      <input type="text" id="passcode" placeholder="Code eingeben..." autocomplete="off" required>
+      <br>
+      <button type="submit">Entschlüsseln</button>
+    </form>
+  </div>
+
+  <script>
+    function checkCode(e) {
+      e.preventDefault();
+      const code = document.getElementById('passcode').value.trim().toLowerCase();
+      
+      // Leitet direkt zur Datei <code-eingabe>.html weiter
+      window.location.href = code + '.html';
+    }
+  </script>
+
+</body>
+</html>
